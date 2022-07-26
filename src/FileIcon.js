@@ -1,53 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import tinycolor from 'tinycolor2';
 import uniqueId from 'lodash.uniqueid';
 
 import glyphs from './glyphs';
 
-const propTypes = {
-  /** Color of icon background */
-  color: PropTypes.string,
-  /** Text to display in label */
-  extension: PropTypes.string,
-  /** Displays the corner fold */
-  fold: PropTypes.bool,
-  /** Color of the corner fold */
-  foldColor: PropTypes.string,
-  /** Color of file type icon */
-  glyphColor: PropTypes.string,
-  /** Color of page gradient */
-  gradientColor: PropTypes.string,
-  /** Opacity of page gradient */
-  gradientOpacity: PropTypes.number,
-  /** Color of label */
-  labelColor: PropTypes.string,
-  /** Color of label text */
-  labelTextColor: PropTypes.string,
-  /** Displays the label in all caps */
-  labelUppercase: PropTypes.bool,
-  /** Corner radius of the file icon */
-  radius: PropTypes.number,
-  /** Type of glyph icon to display */
-  type: PropTypes.oneOf([
-    '3d',
-    'acrobat',
-    'audio',
-    'binary',
-    'code',
-    'code2',
-    'compressed',
-    'document',
-    'drive',
-    'font',
-    'image',
-    'presentation',
-    'settings',
-    'spreadsheet',
-    'vector',
-    'video',
-  ]),
-};
 
 const VIEWBOX = {
   WIDTH: 40,
@@ -81,8 +36,8 @@ export const FileIcon = ({
   type,
 }) => {
   const UNIQUE_ID = uniqueId();
-
   return (
+
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${VIEWBOX.WIDTH} ${VIEWBOX.HEIGHT}`}
@@ -115,36 +70,32 @@ export const FileIcon = ({
           id={`pageGradient${UNIQUE_ID}`}
         >
           <stop
-            stopColor={gradientColor}
-            stopOpacity={gradientOpacity}
+            stop-color={gradientColor}
+            stop-opacity={gradientOpacity}
             offset="0%"
           />
-          <stop stopColor={gradientColor} stopOpacity="0" offset="66.67%" />
+          <stop stop-color={gradientColor} stop-opacity="0" offset="66.67%" />
         </linearGradient>
       </defs>
 
-      <g id="file" clipPath={`url(#pageRadius${UNIQUE_ID})`}>
+      <g id="file" clip-path={`url(#pageRadius${UNIQUE_ID})`}>
         {fold ? (
-          <React.Fragment>
+          <>
             <path
-              d={`M${ICON.X_OFFSET} 0 h ${ICON.WIDTH - FOLD.HEIGHT} L ${
-                ICON.WIDTH + ICON.X_OFFSET
-              } ${FOLD.HEIGHT} v ${ICON.HEIGHT - FOLD.HEIGHT} H ${
-                ICON.X_OFFSET
-              } Z`}
+              d={`M${ICON.X_OFFSET} 0 h ${ICON.WIDTH - FOLD.HEIGHT} L ${ICON.WIDTH + ICON.X_OFFSET
+                } ${FOLD.HEIGHT} v ${ICON.HEIGHT - FOLD.HEIGHT} H ${ICON.X_OFFSET
+                } Z`}
               fill={color}
             />
             <path
-              d={`M${ICON.X_OFFSET} 0 h ${ICON.WIDTH - FOLD.HEIGHT} L ${
-                ICON.WIDTH + ICON.X_OFFSET
-              } ${FOLD.HEIGHT} v ${ICON.HEIGHT - FOLD.HEIGHT} H ${
-                ICON.X_OFFSET
-              } Z`}
+              d={`M${ICON.X_OFFSET} 0 h ${ICON.WIDTH - FOLD.HEIGHT} L ${ICON.WIDTH + ICON.X_OFFSET
+                } ${FOLD.HEIGHT} v ${ICON.HEIGHT - FOLD.HEIGHT} H ${ICON.X_OFFSET
+                } Z`}
               fill={`url(#pageGradient${UNIQUE_ID})`}
             />
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <rect
               x={ICON.X_OFFSET}
               y="0"
@@ -159,7 +110,7 @@ export const FileIcon = ({
               height={ICON.HEIGHT}
               fill={`url(#pageGradient${UNIQUE_ID})`}
             />
-          </React.Fragment>
+          </>
         )}
       </g>
 
@@ -171,13 +122,13 @@ export const FileIcon = ({
             fill={foldColor || tinycolor(color).darken(10).toString()}
             rx={radius}
             ry={radius}
-            clipPath="url(#foldCrop)"
+            clip-path="url(#foldCrop)"
           />
         </g>
       )}
 
       {extension && (
-        <React.Fragment>
+        <>
           <g id="label">
             <rect
               fill={labelColor || tinycolor(color).darken(30).toString()}
@@ -185,29 +136,29 @@ export const FileIcon = ({
               y={ICON.HEIGHT - LABEL_HEIGHT}
               width={ICON.WIDTH}
               height={LABEL_HEIGHT}
-              clipPath={`url(#pageRadius${UNIQUE_ID})`}
+              clip-path={`url(#pageRadius${UNIQUE_ID})`}
             />
           </g>
           <g id="labelText" transform={`translate(${ICON.X_OFFSET} 34)`}>
             <text
               x={ICON.WIDTH / 2}
               y="10"
-              fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
-              fontSize="9"
+              font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+              font-size="9"
               fill={labelTextColor}
-              textAnchor="middle"
+              text-anchor="middle"
               style={{
-                fontWeight: 'bold',
-                textAlign: 'center',
-                pointerEvents: 'none',
-                textTransform: labelUppercase ? 'uppercase' : 'none',
-                userSelect: 'none',
+                'font-weight': 'bold',
+                'text-align': 'center',
+                'pointer-events': 'none',
+                'text-transform': labelUppercase ? 'uppercase' : 'none',
+                'user-select': 'none',
               }}
             >
               {extension}
             </text>
           </g>
-        </React.Fragment>
+        </>
       )}
 
       {type && (
@@ -215,12 +166,11 @@ export const FileIcon = ({
           transform={`translate(-4 ${!extension ? 6 : 0})`}
           fill={glyphColor || tinycolor(color).darken(15).toString()}
         >
-          {glyphs[type]}
+          {glyphs[type]()}
         </g>
       )}
     </svg>
   );
 };
 
-FileIcon.propTypes = propTypes;
 export default FileIcon;

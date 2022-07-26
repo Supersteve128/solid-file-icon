@@ -1,0 +1,18 @@
+{
+    "presets": [
+        "solid",
+        "@babel/preset-env"
+    ],
+    "env": {
+        "test": {
+            "plugins": [
+                "@babel/plugin-transform-modules-commonjs"
+            ]
+        }
+    },
+    "parserOpts": {
+        "plugins": [
+            "jsx"
+        ]
+    }
+}
