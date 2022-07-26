@@ -9,7 +9,8 @@
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest"
   },
   "keywords": [
     "solid",
@@ -34,7 +35,6 @@
     "jest-image-snapshot": "^4.2.0",
     "microbundle": "^0.12.4",
     "react-dom": "^18.2.0",
-    "react-test-renderer": "^18.2.0",
     "rollup": "^2.77.0",
     "rollup-jest": "^3.0.0",
     "rollup-preset-solid": "^1.4.0",

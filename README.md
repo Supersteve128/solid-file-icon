@@ -2,7 +2,7 @@
 
 Inspired by [![React File Icon](https://github.com/corygibbons/react-file-icon)].
 
-[![gh workflow](https://img.shields.io/github/workflow/status/corygibbons/react-file-icon/Test/master.svg?style=flat-square)](https://github.com/corygibbons/react-file-icon/actions?query=workflow%3ATest+branch%3Amaster)
+[![gh workflow](https://img.shields.io/github/workflow/status/Supersteve128/solid-file-icon/Test/master.svg?style=flat-square)](https://github.com/Supersteve128/solid-file-icon/actions?query=workflow%3ATest+branch%3Amaster)
 
 [CodeSandbox demo](https://codesandbox.io/s/react-file-icon-hv4kh) with default icon styles.
 
